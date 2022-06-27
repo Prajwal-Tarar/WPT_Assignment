@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>array</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	let arr=[1,2,3,4,5,6,7,8,9,10];
+	let in_val=$("#id1").val();
+	function find(in_val){
+	let found=false;
+	for(let i=0;i<arr.length;i++){
+			
+			if(arr[i]==in_val){
+				found=true;
+				break;
+			}
+		}
+		return found;
+	}
+	$("#id1").blur(function(){
+	let in_val=$("#id1").val();
+		let res=find(in_val);
+		if(res==true){
+			$("#id2").html("value Present");
+			$("#edit").attr("disabled",false);
+			$("#delete").attr("disabled",false);
+		}
+		else{
+			$("#add").attr("disabled",false);
+		}
+	});
+
+
+	$("#add").click(function(){
+		let in_val=$("#id1").val();
+		let res=find(in_val);
+		if(res==true){
+			$("#id2").html("value Present");
+		}
+		else{
+			arr.push(in_val);
+			console.log(arr);
+		}
+	});
+	
+	$("#edit").click(function(){
+	let oldvalue=$("#id1").val();
+		let newvalue=prompt();
+			
+			edit(oldvalue,newvalue);
+			});
+			
+			function edit(oldvalue,newvalue){
+                let updated=false
+                for(let i=0;i < arr.length ;i++){
+                    if(arr[i]==oldvalue){
+                        arr[i]=newvalue;
+                        updated=true;
+                        break;
+                    }
+                    
+                }
+				console.log(arr);
+                return updated;
+
+            }
+			
+	$("#delete").click(function(){
+		let va=$("#id1").val();
+		for(let i=0;i<arr.length;i++){
+			if(arr[i]==va){
+				arr.splice(i,1);
+				break;
+			}
+		}
+		console.log(arr);
+	});
+	
+	$("#view").click(function(){
+		$("#p1").html(" "+arr);
+	});
+	
+	
+	$("#odd").click(function(){
+		let p=$("#p1");
+		let a="";
+			for(let i=1;i<arr.length;i++){
+			if(i % 2 != 0){
+				a+= i+" ";
+			}
+		}
+		$("#p1").html(" "+a);
+	});
+});
+</script>
+</head>
+<body>
+<input id="id1" type="text" placeholder="input....">
+<span id="id2">Demo Program</span>
+<br>
+<br>
+<button id="add" disabled>ADD</button>
+<button id="edit" disabled>Edit</button>
+<button id="delete" disabled>Delete</button>
+<button id="view">View</button>
+<button id="odd">Odd_val</button>
+<br>
+<hr>
+<br>
+<p id="p1"> </p>
+<br>
+
+</body>
+</html>
